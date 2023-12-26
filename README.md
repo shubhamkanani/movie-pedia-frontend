@@ -1,1 +1,1 @@
-# movie-pedia-frontend
+# Movie-Pedia
