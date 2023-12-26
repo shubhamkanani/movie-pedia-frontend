@@ -1,39 +1,43 @@
 "use client";
 
-import { Box, Grid, useTheme } from "@mui/material";
-import React from "react";
+import { Box } from "@mui/material";
+import React, { useState } from "react";
 import styles from "./MovieList.module.scss";
-import { useRouter } from "next/navigation";
+import { MoviePreview } from "../MoviePreview";
 
-const MovieList = ({ movieList }) => {
-  const theme = useTheme();
-  const router = useRouter();
+const MovieList = ({ movieList, fetchMovieList }) => {
+  const [open, setOpen] = useState(false);
+  const [selectedMovie, setSelectedMovie] = useState(null);
+
   return (
-    <Box
-      sx={{
-        mt: 4,
-        [theme.breakpoints.down("sm")]: {
-          mt: 1,
-        },
-      }}
-      className={styles.container}
-    >
+    <Box sx={{ mt: 2 }} className={styles.container}>
       {movieList &&
         !!movieList?.length &&
-        movieList.map(({ _id, title, publishingYear, poster }, index) => (
-          <Box
-            className={styles.card}
-            onClick={() => router.push(`/movie-form?id=${_id}`)}
-          >
-            <img src={poster} alt="Avatar" style={{ width: "100%" }} />
-            <div className={styles.detailsContainer}>
-              <h6>
-                <b>{title}</b>
-              </h6>
-              <span>{publishingYear}</span>
-            </div>
-          </Box>
-        ))}
+        movieList.map((movie, index) => {
+          const { title, publishingYear, poster } = movie;
+          return (
+            <Box
+              className={styles.card}
+              onClick={() => {
+                setSelectedMovie(movie);
+                setOpen(true);
+              }}
+              key={index}
+            >
+              <img src={poster} alt="Avatar" style={{ width: "100%" }} />
+              <div className={styles.detailsContainer}>
+                <p className={styles.title}>{title}</p>
+                <span className={styles.publishingYear}>{publishingYear}</span>
+              </div>
+            </Box>
+          );
+        })}
+      <MoviePreview
+        open={open && selectedMovie}
+        onClose={() => setOpen(false)}
+        selectedMovie={selectedMovie}
+        fetchMovieList={fetchMovieList}
+      />
     </Box>
   );
 };

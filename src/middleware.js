@@ -8,5 +8,5 @@ export default middleware = (request) => {
 };
 
 export const config = {
-  matcher: ["/movies"],
+  matcher: ["/movies", "/movie-form"],
 };

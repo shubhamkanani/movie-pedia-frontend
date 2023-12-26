@@ -1,0 +1,19 @@
+.mainContent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: none !important;
+}
+
+.dialogContent {
+  background-color: transparent;
+  max-width: 100% !important;
+  overflow: hidden;
+  box-shadow: 0px 0px 10px 1px rgba(255, 255, 255, 0.18) !important;
+  border-radius: 10px;
+
+  @media screen and (max-width: 400px) {
+    margin: 18px;
+  }
+}

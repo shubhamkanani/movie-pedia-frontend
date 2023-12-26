@@ -1,7 +1,5 @@
 import axios from "axios";
-const baseUrl =
-  process.env.BASE_URL ||
-  "https://movie-pedia-backend-dybvbp95z-shubham-kananis-projects.vercel.app/api";
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
 export const axiosPost = async (url, payload) => {
   try {

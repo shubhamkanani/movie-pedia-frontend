@@ -21,6 +21,9 @@ const MyThemeProvider = ({ children }) => {
         main: "#fff",
       },
     },
+    breakpoints: {
+      st: "720px",
+    },
   });
   return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 };

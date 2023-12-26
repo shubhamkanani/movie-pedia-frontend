@@ -3,31 +3,29 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Box, Grid, useTheme } from "@mui/material";
 import styles from "./MovieForm.module.scss";
-import { Button, FilePicker, TextInput } from "@/components";
+import { Button, FilePicker, TextInput } from "../../../components";
 import { useFormik } from "formik";
-import * as Yup from "yup";
-import { addMovie, getMovieById, updateMovie } from "@/services/movies.service";
+import {
+  addMovie,
+  getMovieById,
+  updateMovie,
+} from "../../../services/movies.service";
 import { toast } from "react-toastify";
 import { useRouter, useSearchParams } from "next/navigation";
+import { validationSchema } from "./const";
 
 const MovieForm = () => {
   const theme = useTheme();
   const router = useRouter();
   const searchParams = useSearchParams();
+  const id = searchParams.get("id");
   const [formValues, setFormValues] = useState({
     title: "",
     publishingYear: "",
     image: null,
   });
   const [loading, setLoading] = useState(false);
-
-  const validationSchema = Yup.object().shape({
-    title: Yup.string().required("Title is required"),
-    publishingYear: Yup.number()
-      .typeError("Publishing year must be a number")
-      .required("Publishing year is required"),
-    image: Yup.mixed().required("Image is required"),
-  });
+  const [selectedFile, setSelectedFile] = useState(null);
 
   useEffect(() => {
     const id = searchParams.get("id");
@@ -71,6 +69,7 @@ const MovieForm = () => {
       });
       const file = new File([blob], "image.png", { type: "image/png" });
       if (file) {
+        setSelectedFile(file);
         formik.setFieldValue("image", file);
       }
     }
@@ -120,6 +119,7 @@ const MovieForm = () => {
     setLoading(false);
     if (res?.status === 200) {
       toast.success(res?.data?.message);
+      router.push("/movies");
     } else {
       toast.error(res?.data?.message);
     }
@@ -133,7 +133,7 @@ const MovieForm = () => {
     <Box
       sx={{
         mt: 10,
-        px: 10,
+        px: 15,
         [theme.breakpoints.down("sm")]: {
           px: 2,
           mt: 3,
@@ -141,11 +141,11 @@ const MovieForm = () => {
       }}
     >
       <Box className={styles.header}>
-        <h3>Create a new movie</h3>
+        {id ? <h3>Edit</h3> : <h3>Create a new movie</h3>}
       </Box>
       <Box
         sx={{
-          mt: 4,
+          mt: 10,
           [theme.breakpoints.down("sm")]: {
             mt: 1,
           },
@@ -157,8 +157,15 @@ const MovieForm = () => {
               <FilePicker
                 name="image"
                 accept="image/*"
+                selectedFile={selectedFile}
+                setSelectedFile={setSelectedFile}
                 onChange={(event) => {
+                  setSelectedFile(event?.currentTarget?.files[0]);
                   formik.setFieldValue("image", event.currentTarget.files[0]);
+                }}
+                handleRemoveImage={() => {
+                  setSelectedFile(null);
+                  formik.setFieldValue("image", null);
                 }}
                 placeholder="Drop an image here"
                 error={formik.errors.image && formik.touched.image}
@@ -208,7 +215,7 @@ const MovieForm = () => {
                     <Box>
                       <Button
                         type="submit"
-                        text="Submit"
+                        text={id ? "Update" : "Submit"}
                         variant="contained"
                         loading={loading}
                         fullWidth

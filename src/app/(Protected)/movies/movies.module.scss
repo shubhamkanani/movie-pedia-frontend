@@ -1,3 +1,21 @@
+.container {
+  @media screen and ((min-width: 600px) and (max-width: 720px)) {
+    padding-left: 60px !important;
+    padding-right: 60px !important;
+  }
+
+  .searchIcon {
+    width: 46px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2bd17e;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+}
+
 .loadingContainer {
   position: relative;
   width: 100%;

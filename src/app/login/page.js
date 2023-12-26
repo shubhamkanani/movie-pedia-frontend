@@ -2,14 +2,14 @@
 
 import React from "react";
 import styles from "./login.module.scss";
-import { Button, TextInput } from "@/components";
+import { Button, TextInput } from "../../components";
 import { Checkbox, FormControlLabel, Grid } from "@mui/material";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
-import { login } from "@/services/login";
+import { login } from "../../services/login";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
-import { setCookie } from "@/utils/cookies.utils";
+import { setCookie } from "../../utils/cookies.utils";
 
 const initialValues = {
   email: "",
@@ -30,7 +30,6 @@ const Login = () => {
       ...values,
     });
     setSubmitting(false);
-    debugger;
     if (res?.status === 200) {
       toast.success(res?.data?.message);
       setCookie("token", `Bearer ${res?.data?.token}`);

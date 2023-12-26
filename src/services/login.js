@@ -1,4 +1,4 @@
-import { axiosPost } from "@/app/axios/axiosWithoutAuth";
+import { axiosPost } from "../app/axios/axiosWithoutAuth";
 
 export const login = async (payload) => {
   try {

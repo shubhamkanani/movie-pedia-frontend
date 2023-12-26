@@ -1,9 +1,9 @@
 "use client";
 
-import { ThemeProvider } from "@/components";
+import { ThemeProvider } from "../components";
 import { ToastContainer } from "react-toastify";
 import "./globals.scss";
-import styles from './layout.module.scss';
+import styles from "./layout.module.scss";
 
 // export const metadata = {
 //   title: "Create Next Asdfsdfsdfpp",
