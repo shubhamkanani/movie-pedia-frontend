@@ -12,7 +12,6 @@ import { Header, MovieList } from "./components";
 import { Button, Pagination, TextInput, Select } from "../../../components";
 import { getMovieList } from "../../../services/movies.service";
 import { useRouter } from "next/navigation";
-import debounce from "lodash/debounce";
 import { Search } from "@mui/icons-material";
 
 import styles from "./movies.module.scss";
