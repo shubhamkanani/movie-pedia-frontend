@@ -1,0 +1,25 @@
+.container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+
+  .loginContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 320px;
+    max-width: 100%;
+    padding: 0px 10px;
+
+    .rememberMe {
+      display: flex;
+      justify-content: center;
+    }
+  }
+}
+
+.center {
+  text-align: center;
+}

@@ -1,0 +1,16 @@
+.input {
+  border: none;
+  outline: none;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #224957;
+  color: #fff;
+
+  &::placeholder {
+    color: #fff;
+  }
+}
+
+.fullWidth {
+  width: 100%;
+}

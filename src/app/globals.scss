@@ -1,0 +1,38 @@
+@import url("https://fonts.googleapis.com/css2?family=Borel&family=Montserrat:wght@400;500&family=Roboto:ital,wght@0,100;1,100&display=swap");
+@import "react-toastify/dist/ReactToastify.css";
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "Montserrat";
+}
+
+button {
+  text-transform: none !important;
+}
+
+h1 {
+  font-size: 64px;
+  line-height: 80px;
+}
+h2 {
+  font-size: 48px;
+  line-height: 56px;
+}
+h3 {
+  font-size: 32px;
+  line-height: 40px;
+}
+h4 {
+  font-size: 24px;
+  line-height: 32px;
+}
+h5 {
+  font-size: 20px;
+  line-height: 24px;
+}
+h6 {
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 1px;
+}

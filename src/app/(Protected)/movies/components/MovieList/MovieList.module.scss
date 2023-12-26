@@ -1,0 +1,26 @@
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-gap: 20px;
+  .card {
+    transition: 0.3s;
+    padding: 8px;
+    background-color: #092c39;
+    border-radius: 8px;
+    width: 100%;
+    cursor: pointer;
+
+    > img {
+      border-radius: 8px;
+      height: 280px;
+      object-fit: cover;
+    }
+
+    .detailsContainer{
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 8px;
+    }
+  }
+}
