@@ -8,6 +8,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
+import Cookies from "js-cookie";
 import { Header, MovieList } from "./components";
 import { Button, Pagination, TextInput, Select } from "../../../components";
 import { getMovieList } from "../../../services/movies.service";
@@ -36,10 +37,15 @@ const Movies = () => {
   };
 
   useEffect(() => {
-    fetchMovieList(currentPage);
+    const token = Cookies.get("token");
+    if (!token) {
+      return router.push("/login");
+    }
+
+    fetchMovieList();
   }, []);
 
-  const fetchMovieList = async (newPage) => {
+  const fetchMovieList = async (newPage = currentPage) => {
     setLoading(true);
     const payload = {
       name: searchTerm,

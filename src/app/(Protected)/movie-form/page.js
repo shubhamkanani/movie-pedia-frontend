@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useCallback, useEffect, useState } from "react";
+import Cookies from "js-cookie";
 import { Box, Grid, useTheme } from "@mui/material";
 import styles from "./MovieForm.module.scss";
 import { Button, FilePicker, TextInput } from "../../../components";
@@ -26,6 +27,13 @@ const MovieForm = () => {
   });
   const [loading, setLoading] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
+
+  useEffect(() => {
+    const token = Cookies.get("token");
+    if (!token) {
+      return router.push("/login");
+    }
+  }, []);
 
   useEffect(() => {
     const id = searchParams.get("id");
