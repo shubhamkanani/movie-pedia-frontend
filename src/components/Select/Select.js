@@ -7,6 +7,11 @@ import styles from "./Select.module.scss";
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
+  sx: {
+    "&& .Mui-selected": {
+      backgroundColor: "rgb(30, 146, 88)",
+    },
+  },
   PaperProps: {
     style: {
       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
@@ -50,7 +55,13 @@ const Dropdown = ({ selectedItem, setSelectedItem }) => {
           classes={{ select: { color: "red" } }}
         >
           {years.map((year) => (
-            <MenuItem key={year} value={year}>
+            <MenuItem
+              key={year}
+              value={year}
+              sx={{
+                margin: "2px 0",
+              }}
+            >
               {year}
             </MenuItem>
           ))}
