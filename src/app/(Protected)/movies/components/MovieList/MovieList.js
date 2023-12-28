@@ -22,6 +22,7 @@ const MovieList = ({ movieList, fetchMovieList }) => {
                 setSelectedMovie(movie);
                 setOpen(true);
               }}
+              title={title}
               key={index}
             >
               <img src={poster} alt="Avatar" style={{ width: "100%" }} />
