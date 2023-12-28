@@ -226,9 +226,10 @@ const MovieForm = () => {
                     <Box>
                       <Button
                         text="Cancel"
-                        variant="outlined"
+                        // variant="outlined"
                         fullWidth
                         onClick={handleClear}
+                        sx={{ border: "1px solid #fff" }}
                       />
                     </Box>
                   </Grid>
