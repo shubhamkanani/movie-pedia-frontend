@@ -6,8 +6,19 @@
     width: 500px;
     height: 500px;
 
-    @media screen and (max-width: 700px) {
+    @media screen and (max-width: 915px) {
       width: 100%;
+    }
+  }
+
+  .bigScreen {
+    @media screen and (max-width: 915px) {
+      display: none !important;
+    }
+  }
+  .smallerScreen {
+    @media screen and (min-width: 915px) {
+      display: none !important;
     }
   }
 
@@ -15,13 +26,13 @@
     margin-left: 100px;
     min-width: 362px;
 
-    @media screen and (max-width: 700px) {
+    @media screen and (max-width: 915px) {
       margin-left: unset !important;
       min-width: unset !important;
     }
   }
 
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: 915px) {
     flex-direction: column;
   }
 }

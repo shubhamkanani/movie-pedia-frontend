@@ -1,11 +1,11 @@
-import axios from "axios";
 import { getCookie } from "../../utils/cookies.utils";
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+import { axiosInstance } from "./axiosInstance";
 
 export const axiosGet = async (url) => {
   try {
     const mainUrl = `${baseUrl}${url}`;
-    const response = await axios.get(mainUrl, {
+    const response = await axiosInstance.get(mainUrl, {
       headers: {
         authorization: getCookie("token"),
       },
@@ -18,7 +18,7 @@ export const axiosGet = async (url) => {
 export const axiosPost = async (url, payload) => {
   try {
     const mainUrl = `${baseUrl}${url}`;
-    const response = await axios.post(mainUrl, payload, {
+    const response = await axiosInstance.post(mainUrl, payload, {
       headers: {
         authorization: getCookie("token"),
       },
@@ -31,7 +31,7 @@ export const axiosPost = async (url, payload) => {
 export const axiosPut = async (url, payload) => {
   try {
     const mainUrl = `${baseUrl}${url}`;
-    const response = await axios.put(mainUrl, payload, {
+    const response = await axiosInstance.put(mainUrl, payload, {
       headers: {
         authorization: getCookie("token"),
       },
@@ -44,7 +44,7 @@ export const axiosPut = async (url, payload) => {
 export const axiosDelete = async (url) => {
   try {
     const mainUrl = `${baseUrl}${url}`;
-    const response = await axios.delete(mainUrl, {
+    const response = await axiosInstance.delete(mainUrl, {
       headers: {
         authorization: getCookie("token"),
       },

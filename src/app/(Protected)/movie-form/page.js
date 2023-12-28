@@ -14,6 +14,7 @@ import {
 import { toast } from "react-toastify";
 import { useRouter, useSearchParams } from "next/navigation";
 import { validationSchema } from "./const";
+import { setCookie } from "../../../utils/cookies.utils";
 
 const MovieForm = () => {
   const theme = useTheme();
@@ -29,9 +30,11 @@ const MovieForm = () => {
   const [selectedFile, setSelectedFile] = useState(null);
 
   useEffect(() => {
-    const token = Cookies.get("token");
+    const token = Cookies.get("token") || localStorage.getItem("token");
     if (!token) {
       return router.push("/login");
+    } else {
+      setCookie("token", token);
     }
   }, []);
 
@@ -137,14 +140,34 @@ const MovieForm = () => {
     router.push("/movies");
   };
 
+  const getFilePicker = () => (
+    <FilePicker
+      name="image"
+      accept="image/*"
+      selectedFile={selectedFile}
+      setSelectedFile={setSelectedFile}
+      onChange={(event) => {
+        setSelectedFile(event?.currentTarget?.files[0]);
+        formik.setFieldValue("image", event.currentTarget.files[0]);
+      }}
+      handleRemoveImage={() => {
+        setSelectedFile(null);
+        formik.setFieldValue("image", null);
+      }}
+      placeholder="Drop an image here"
+      error={formik.errors.image && formik.touched.image}
+      errorMessage={formik.errors.image}
+    />
+  );
+
   return (
     <Box
       sx={{
-        mt: 10,
+        pt: 10,
         px: 15,
         [theme.breakpoints.down("sm")]: {
           px: 2,
-          mt: 3,
+          pt: 3,
         },
       }}
     >
@@ -161,24 +184,8 @@ const MovieForm = () => {
       >
         <form onSubmit={formik.handleSubmit}>
           <Box className={styles.form}>
-            <Box className={styles.leftContent}>
-              <FilePicker
-                name="image"
-                accept="image/*"
-                selectedFile={selectedFile}
-                setSelectedFile={setSelectedFile}
-                onChange={(event) => {
-                  setSelectedFile(event?.currentTarget?.files[0]);
-                  formik.setFieldValue("image", event.currentTarget.files[0]);
-                }}
-                handleRemoveImage={() => {
-                  setSelectedFile(null);
-                  formik.setFieldValue("image", null);
-                }}
-                placeholder="Drop an image here"
-                error={formik.errors.image && formik.touched.image}
-                errorMessage={formik.errors.image}
-              />
+            <Box className={`${styles.leftContent} ${styles.bigScreen}`}>
+              {getFilePicker()}
             </Box>
             <Box className={styles.rightContent}>
               <Box>
@@ -206,6 +213,12 @@ const MovieForm = () => {
                   }
                   errorMessage={formik.errors.publishingYear}
                 />
+              </Box>
+              <Box
+                className={`${styles.leftContent} ${styles.smallerScreen}`}
+                sx={{ mt: 2 }}
+              >
+                {getFilePicker()}
               </Box>
               <Box sx={{ mt: 5 }}>
                 <Grid container spacing={1}>

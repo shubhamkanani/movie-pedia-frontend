@@ -16,6 +16,7 @@ import { useRouter } from "next/navigation";
 import { Search } from "@mui/icons-material";
 
 import styles from "./movies.module.scss";
+import { setCookie } from "../../../utils/cookies.utils";
 
 const rowsPerPage = 10;
 
@@ -37,9 +38,11 @@ const Movies = () => {
   };
 
   useEffect(() => {
-    const token = Cookies.get("token");
+    const token = Cookies.get("token") || localStorage.getItem("token");
     if (!token) {
       return router.push("/login");
+    } else {
+      setCookie("token", token);
     }
 
     fetchMovieList();
@@ -61,7 +64,6 @@ const Movies = () => {
   };
 
   if (!movieList?.length && !loading && !recordCount) {
-    // debugger;
     return (
       <Box className={styles.emptyListContainer}>
         <Box className={styles.container}>
@@ -86,11 +88,11 @@ const Movies = () => {
   return (
     <Box
       sx={{
-        mt: 10,
+        pt: 10,
         px: 15,
         [theme.breakpoints.down("sm")]: {
           px: 2,
-          mt: 3,
+          pt: 3,
         },
       }}
       className={styles.container}
@@ -105,7 +107,7 @@ const Movies = () => {
           },
         }}
       >
-        <Grid container>
+        <Grid container alignItems={"center"}>
           <Grid item lg={6} xs={9}>
             <Grid container spacing={1}>
               <Grid item xs={6}>

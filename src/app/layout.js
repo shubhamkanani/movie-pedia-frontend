@@ -2,6 +2,7 @@
 
 import { ThemeProvider } from "../components";
 import { ToastContainer } from "react-toastify";
+import { Background } from "../components";
 import "./globals.scss";
 import styles from "./layout.module.scss";
 
@@ -16,6 +17,7 @@ export default function RootLayout({ children }) {
       <html lang="en">
         <body className={styles.body}>
           {children}
+          <Background />
           <ToastContainer autoClose={2000} />
         </body>
       </html>

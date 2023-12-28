@@ -5,3 +5,4 @@ export * from "./Pagination";
 export * from "./FilePicker";
 export * from "./Modal";
 export * from "./Select";
+export * from "./Background";

@@ -5,7 +5,9 @@
   border-radius: 8px;
   background-color: #224957;
   color: #fff;
-
+  font-size: 14px;
+  height: 45px;
+  max-height: 100%;
   &::placeholder {
     color: #fff;
   }

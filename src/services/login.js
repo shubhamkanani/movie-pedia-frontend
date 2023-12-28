@@ -7,7 +7,6 @@ export const login = async (payload) => {
     });
     return res;
   } catch (error) {
-    debugger;
     return error;
   }
 };

@@ -14,6 +14,7 @@ import { setCookie } from "../../utils/cookies.utils";
 const initialValues = {
   email: "",
   password: "",
+  rememberMe: false,
 };
 
 const validationSchema = Yup.object().shape({
@@ -26,6 +27,7 @@ const validationSchema = Yup.object().shape({
 const Login = () => {
   const router = useRouter();
   const handleSubmit = async (values, { setSubmitting }) => {
+    const { rememberMe } = values;
     const res = await login({
       ...values,
     });
@@ -33,6 +35,11 @@ const Login = () => {
     if (res?.status === 200) {
       toast.success(res?.data?.message);
       setCookie("token", `Bearer ${res?.data?.token}`);
+      if (rememberMe) {
+        localStorage.setItem("token", `Bearer ${res?.data?.token}`);
+      } else {
+        localStorage.clear();
+      }
       router.push("/movies");
     } else {
       toast.error(res?.data?.message);
@@ -78,6 +85,7 @@ const Login = () => {
                   <TextInput
                     fullWidth
                     name="password"
+                    type="password"
                     placeholder="Password"
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -88,7 +96,18 @@ const Login = () => {
                 </Grid>
                 <Grid item xs={12} className={styles.rememberMe}>
                   <FormControlLabel
-                    control={<Checkbox />}
+                    control={
+                      <Checkbox
+                        name="rememberMe"
+                        checked={values.rememberMe}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        disableRipple
+                        sx={{
+                          "&:hover": { bgcolor: "transparent" },
+                        }}
+                      />
+                    }
                     label="Remember me"
                   />
                 </Grid>

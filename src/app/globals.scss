@@ -1,5 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Borel&family=Montserrat:wght@400;500&family=Roboto:ital,wght@0,100;1,100&display=swap");
 @import "react-toastify/dist/ReactToastify.css";
+@font-face {
+  font-family: "Montserrat";
+  src: url("../../public/font/Montserrat/Montserrat-Medium.ttf");
+  font-weight: 400;
+  font-style: normal;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
